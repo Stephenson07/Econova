@@ -1,0 +1,31 @@
+c:/Users/steph/OneDrive/文档/Desktop/test/test_project/
+├── folder_structure
+├── lib/
+│   ├── main.dart
+│   ├── screens/
+│   │   ├── addblog_screen.dart
+│   │   ├── blogs_screen.dart
+│   │   ├── cart.dart
+│   │   ├── cart_screen.dart
+│   │   ├── contact_screen.dart
+│   │   ├── create_group_screen.dart
+│   │   ├── credits_screen.dart
+│   │   ├── events_screen.dart
+│   │   ├── groups_screen.dart
+│   │   ├── history_screen.dart
+│   │   ├── home_screen.dart
+│   │   ├── Product_Detail_Screen.dart
+│   │   ├── report_screen.dart
+│   │   ├── scan_screen.dart
+│   │   ├── settings_screen.dart
+│   │   └── store_screen.dart
+│   └── widgets/
+│       ├── action_buttons.dart
+│       ├── bottom_navbar.dart
+│       ├── carousel_slider.dart
+│       ├── custom_drawer.dart
+│       ├── header.dart
+│       └── toast.dart
+├── pubspec.lock
+├── pubspec.yaml
+├── README.md
