@@ -6,6 +6,7 @@ import 'cart_screen.dart';
 import 'add_product_screen.dart';
 
 class Product {
+  final String id;
   final String name;
   final double price;
   final String durability;
@@ -20,176 +21,175 @@ class Product {
     required this.imageUrl,
     required this.date,
     required this.description,
-  });
+    String? id,
+  }) : id = id ?? UniqueKey().toString();
 }
 
 class StoreScreen extends StatefulWidget {
   const StoreScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _StoreScreenState createState() => _StoreScreenState();
+  State<StoreScreen> createState() => _StoreScreenState();
 }
 
 class _StoreScreenState extends State<StoreScreen> {
   final Cart _cart = Cart();
-  List<Product> products = [];
+  final List<Product> _products = [];
+  List<Product> _filteredProducts = [];
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    // Add some initial products
-    products = [
-      Product(
-        name: 'Product 1',
-        price: 300.0,
-        durability: '2 years',
-        imageUrl: 'assets/images/product_0.png',
-        date: DateTime.now().subtract(Duration(days: 1)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 2',
-        price: 150.0,
-        durability: '1 year',
-        imageUrl: 'assets/images/product_1.png',
-        date: DateTime.now().subtract(Duration(days: 5)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 10',
-        price: 450.0,
-        durability: '3 years',
-        imageUrl: 'assets/images/product_10.png',
-        date: DateTime.now().subtract(Duration(days: 10)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_3.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_4.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_5.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_6.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_10.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_0.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_3.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_1.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_2.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_3.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-      Product(
-        name: 'Product 4',
-        price: 600.0,
-        durability: '5 years',
-        imageUrl: 'assets/images/product_0.png',
-        date: DateTime.now().subtract(Duration(days: 3)),
-        description: 'something laptop',
-      ),
-    ];
+    _loadInitialProducts();
+    _filteredProducts = List.from(_products);
+    _searchController.addListener(_filterProducts);
   }
 
-  // Add a method to add new products
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _loadInitialProducts() {
+    _products.addAll([
+      Product(
+        name: 'Laptop Pro X1',
+        price: 1299.99,
+        durability: '4 years',
+        imageUrl: 'assets/images/product_0.png',
+        date: DateTime.now().subtract(const Duration(days: 1)),
+        description: 'High-performance laptop with 16GB RAM and 512GB SSD',
+      ),
+      Product(
+        name: 'Smartphone Galaxy S30',
+        price: 899.99,
+        durability: '3 years',
+        imageUrl: 'assets/images/product_1.png',
+        date: DateTime.now().subtract(const Duration(days: 5)),
+        description:
+            'Latest smartphone with 6.7" AMOLED display and 108MP camera',
+      ),
+      Product(
+        name: 'Wireless Headphones',
+        price: 249.99,
+        durability: '2 years',
+        imageUrl: 'assets/images/product_10.png',
+        date: DateTime.now().subtract(const Duration(days: 10)),
+        description:
+            'Noise-cancelling wireless headphones with 30-hour battery life',
+      ),
+      Product(
+        name: 'Smart Watch Pro',
+        price: 349.99,
+        durability: '3 years',
+        imageUrl: 'assets/images/product_3.png',
+        date: DateTime.now().subtract(const Duration(days: 3)),
+        description: 'Fitness and health tracking smartwatch with GPS',
+      ),
+      Product(
+        name: 'Tablet Air',
+        price: 599.99,
+        durability: '4 years',
+        imageUrl: 'assets/images/product_4.png',
+        date: DateTime.now().subtract(const Duration(days: 7)),
+        description: '10.9-inch tablet with A14 chip and all-day battery life',
+      ),
+      Product(
+        name: 'Wireless Earbuds',
+        price: 149.99,
+        durability: '2 years',
+        imageUrl: 'assets/images/product_5.png',
+        date: DateTime.now().subtract(const Duration(days: 15)),
+        description: 'True wireless earbuds with active noise cancellation',
+      ),
+      Product(
+        name: 'Gaming Console X',
+        price: 499.99,
+        durability: '5 years',
+        imageUrl: 'assets/images/product_6.png',
+        date: DateTime.now().subtract(const Duration(days: 20)),
+        description: 'Next-gen gaming console with 4K gaming at 60fps',
+      ),
+    ]);
+  }
+
+  void _filterProducts() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      if (query.isEmpty) {
+        _filteredProducts = List.from(_products);
+      } else {
+        _filteredProducts =
+            _products
+                .where(
+                  (product) =>
+                      product.name.toLowerCase().contains(query) ||
+                      product.description.toLowerCase().contains(query),
+                )
+                .toList();
+      }
+    });
+  }
+
   void _addProduct(Product newProduct) {
     setState(() {
-      products.add(newProduct);
+      _products.add(newProduct);
+      _filterProducts();
     });
+  }
+
+  void _addToCart(Product product) {
+    _cart.addToCart(product);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${product.name} added to cart'),
+        duration: const Duration(seconds: 1),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            // Search Bar - now takes less space to make room for cart button
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(right: 8),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search products...',
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    contentPadding: EdgeInsets.symmetric(vertical: 0),
+      appBar: _buildAppBar(),
+      body: _buildProductGrid(),
+      floatingActionButton: _buildAddProductButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: Row(
+        children: [
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.only(right: 8),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search products...',
+                  prefixIcon: const Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
                   ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                  contentPadding: const EdgeInsets.symmetric(vertical: 0),
                 ),
               ),
             ),
-            // Cart Button - now located in the AppBar
-            IconButton(
-              icon: Icon(Icons.shopping_cart),
+          ),
+          Badge(
+            label: Text(_cart.items.length.toString()),
+            isLabelVisible: _cart.items.isNotEmpty,
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -200,48 +200,46 @@ class _StoreScreenState extends State<StoreScreen> {
               },
               tooltip: 'View Cart',
             ),
-          ],
-        ),
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            childAspectRatio: 0.53, // Reduces item height for better scaling
           ),
-          itemCount: products.length,
-          itemBuilder: (context, index) {
-            final product = products[index];
-            return _buildProductCard(context, product);
-          },
-        ),
+        ],
       ),
-      // Add Product as a Floating Action Button
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder:
-                  (context) => AddProductScreen(onProductAdded: _addProduct),
-            ),
-          );
-        },
-        backgroundColor: Colors.blue,
-        child: Icon(Icons.add_circle, size: 30),
-        tooltip: 'Add Product',
-      ),
-      // Set the position to bottom left
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      backgroundColor: Colors.white,
+      elevation: 1,
     );
   }
 
+  Widget _buildProductGrid() {
+    return _filteredProducts.isEmpty
+        ? const Center(
+          child: Text(
+            'No products found',
+            style: TextStyle(fontSize: 18, color: Colors.grey),
+          ),
+        )
+        : Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 0.55,
+            ),
+            itemCount: _filteredProducts.length,
+            itemBuilder: (context, index) {
+              final product = _filteredProducts[index];
+              return _buildProductCard(context, product);
+            },
+          ),
+        );
+  }
+
   Widget _buildProductCard(BuildContext context, Product product) {
-    String formattedDate = DateFormat('yyyy-MM-dd').format(product.date);
+    final formattedDate = DateFormat('yyyy-MM-dd').format(product.date);
+    final formattedPrice = NumberFormat.currency(
+      symbol: '₹',
+      decimalDigits: 2,
+    ).format(product.price);
 
     return GestureDetector(
       onTap: () {
@@ -258,15 +256,18 @@ class _StoreScreenState extends State<StoreScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 120, // Fixed height for testing
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(15),
-                ),
-                image: DecorationImage(
-                  image: AssetImage(product.imageUrl),
-                  fit: BoxFit.cover,
+            Hero(
+              tag: 'product-image-${product.id}',
+              child: Container(
+                height: 120,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(15),
+                  ),
+                  image: DecorationImage(
+                    image: AssetImage(product.imageUrl),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -277,16 +278,20 @@ class _StoreScreenState extends State<StoreScreen> {
                 children: [
                   Text(
                     product.name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '₹${product.price}',
-                    style: TextStyle(
+                    formattedPrice,
+                    style: const TextStyle(
                       color: Colors.green,
                       fontWeight: FontWeight.w600,
+                      fontSize: 15,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -298,32 +303,29 @@ class _StoreScreenState extends State<StoreScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Added on:$formattedDate',
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
+                    'Added on: $formattedDate',
+                    style: TextStyle(fontSize: 11, color: Colors.grey[700]),
                   ),
-                  // Add to cart button for each product
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        _cart.addToCart(product);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('${product.name} added to cart'),
-                            duration: Duration(seconds: 1),
-                          ),
-                        );
-                      },
+                    child: ElevatedButton.icon(
+                      onPressed: () => _addToCart(product),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
-                        padding: EdgeInsets.symmetric(vertical: 4),
-                        textStyle: TextStyle(fontSize: 12),
-                        minimumSize: Size(double.infinity, 30),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
-                      child: Text(
+                      icon: const Icon(
+                        Icons.add_shopping_cart,
+                        size: 16,
+                        color: Colors.white,
+                      ),
+                      label: const Text(
                         'Add to Cart',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
@@ -333,6 +335,23 @@ class _StoreScreenState extends State<StoreScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  FloatingActionButton _buildAddProductButton() {
+    return FloatingActionButton.extended(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AddProductScreen(onProductAdded: _addProduct),
+          ),
+        );
+      },
+      backgroundColor: Colors.blue,
+      icon: const Icon(Icons.add_circle, color: Colors.white),
+      label: const Text('Add Product', style: TextStyle(color: Colors.white)),
+      tooltip: 'Add New Product',
     );
   }
 }

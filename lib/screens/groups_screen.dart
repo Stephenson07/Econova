@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/main.dart';
 import 'create_group_screen.dart';
 
 class GroupsScreen extends StatefulWidget {
@@ -71,6 +72,16 @@ class _GroupsScreenState extends State<GroupsScreen> {
               appBar: AppBar(
                 title: Text(group['name']),
                 backgroundColor: Colors.blue,
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const GroupsScreen(),
+                      ),
+                    );
+                  },
+                ),
               ),
               body: Center(
                 child: Column(
@@ -139,13 +150,27 @@ class _GroupsScreenState extends State<GroupsScreen> {
         elevation: 0,
         // backgroundColor: Theme.of(context).colorScheme.primary,
         backgroundColor: Colors.blue,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const MainAppScreen()),
+            );
+          },
+        ),
         title: const Text(
           'My Groups',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.search), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.filter_list), onPressed: () {}),
+          IconButton(
+            icon: const Icon(Icons.search, color: Colors.white),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(Icons.filter_list, color: Colors.white),
+            onPressed: () {},
+          ),
         ],
       ),
       body: Container(
@@ -188,7 +213,7 @@ class _GroupsScreenState extends State<GroupsScreen> {
             _addGroup(newGroup);
           }
         },
-        icon: const Icon(Icons.add),
+        icon: const Icon(Icons.add, color: Colors.white),
         label: const Text(
           'Create Group',
           style: TextStyle(color: Colors.white, fontFamily: 'Poppins'),

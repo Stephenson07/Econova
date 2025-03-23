@@ -154,7 +154,7 @@ class _ScanScreenState extends State<ScanScreen> {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://192.168.1.48:5000/upload'),
+        Uri.parse('http://192.168.31.180:5000/upload'),
       );
       request.files.add(await http.MultipartFile.fromPath('images', file.path));
 
@@ -188,7 +188,7 @@ class _ScanScreenState extends State<ScanScreen> {
 
     try {
       var response = await http.get(
-        Uri.parse('http://192.168.1.48:5000/analyze?filename=$filename'),
+        Uri.parse('http://192.168.31.180:5000/analyze?filename=$filename'),
       );
 
       if (response.statusCode == 200) {

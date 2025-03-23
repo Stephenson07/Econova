@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:test_project/main.dart';
 // import 'package:intl/intl.dart';
 
 class EWasteDashboard extends StatefulWidget {
@@ -53,13 +54,16 @@ class _EWasteDashboardState extends State<EWasteDashboard> {
             color: Colors.white,
           ),
         ),
-        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const MainAppScreen()),
+            );
+          },
+        ),
         elevation: 0,
         backgroundColor: Colors.blue,
-        // actions: [
-        //   IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
-        //   IconButton(icon: const Icon(Icons.person), onPressed: () {}),
-        // ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -67,16 +71,6 @@ class _EWasteDashboardState extends State<EWasteDashboard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // User greeting
-              // const Text(
-              //   'Hello, Sarah!',
-              //   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              // ),
-              // const SizedBox(height: 8),
-              // Text(
-              //   'Your recycling journey for ${DateFormat('MMMM yyyy').format(DateTime.now())}',
-              //   style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-              // ),
               const SizedBox(height: 24),
 
               // Summary cards

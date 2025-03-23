@@ -6,29 +6,28 @@ class ActionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(child: _buildButton('Buy')),
-            Expanded(child: _buildButton('Sell')),
-          ],
-        ),
-        _buildButton('Recycle', double.infinity),
-        ElevatedButton(
-          onPressed: () {
-            print("Button Pressed!");
-          },
-          child: const Text('data'),
-        ),
-      ],
+      children: [_buildRowOfButtons(), _buildFullWidthButton('Recycle')],
     );
   }
 
-  Widget _buildButton(String text, [double? wid]) {
+  // Creates a row with Buy and Sell buttons
+  Widget _buildRowOfButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [_buildButton('Buy'), _buildButton('Sell')],
+    );
+  }
+
+  // Creates a button that takes full width
+  Widget _buildFullWidthButton(String text) {
+    return _buildButton(text, double.infinity);
+  }
+
+  // Reusable method to build buttons with customizable text and width
+  Widget _buildButton(String text, [double? width]) {
     return Container(
       height: 70,
-      width: wid, // No need for width in Expanded
+      width: width ?? double.infinity, // Default to full width if not provided
       padding: const EdgeInsets.all(15),
       margin: const EdgeInsets.all(5),
       decoration: BoxDecoration(

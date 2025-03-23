@@ -99,7 +99,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add New Product'),
+        title: Text('Add New Product', style: TextStyle(fontFamily: 'Poppins')),
         backgroundColor: Colors.blue,
       ),
       body:

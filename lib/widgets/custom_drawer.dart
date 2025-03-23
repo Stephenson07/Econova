@@ -8,7 +8,6 @@ import '../screens/settings_screen.dart';
 import '../screens/contact_screen.dart';
 import '../screens/report_screen.dart';
 import '../screens/dashboard_screen.dart';
-// import '../screens/signin_screen.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -23,40 +22,7 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
-            decoration: BoxDecoration(color: Colors.blue),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                IconButton(
-                  icon: ColorFiltered(
-                    colorFilter: const ColorFilter.mode(
-                      Colors.white, // Change this to your desired color
-                      BlendMode.srcIn, // Ensures the color fills the image
-                    ),
-                    child: Image.network(
-                      'https://cdn0.iconfinder.com/data/icons/cryptocurrency-137/128/1_profile_user_avatar_account_person-132-1024.png',
-                      height: 70,
-                      width: 70,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => SettingsScreen()),
-                    );
-                  },
-                ),
-
-                SizedBox(height: 10),
-                Text(
-                  // Display username from global state
-                  'Hello, ${username.isNotEmpty ? username : "User"}!',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-              ],
-            ),
-          ),
+          _buildDrawerHeader(context, username),
           _buildDrawerItem(
             context,
             Icons.event,
@@ -99,6 +65,41 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 
+  Widget _buildDrawerHeader(BuildContext context, String username) {
+    return DrawerHeader(
+      decoration: BoxDecoration(color: Colors.blue),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          IconButton(
+            icon: ColorFiltered(
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
+              ),
+              child: Image.network(
+                'https://cdn0.iconfinder.com/data/icons/cryptocurrency-137/128/1_profile_user_avatar_account_person-132-1024.png',
+                height: 70,
+                width: 70,
+              ),
+            ),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              );
+            },
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Hello, ${username.isNotEmpty ? username : "User"}!',
+            style: const TextStyle(fontSize: 18, color: Colors.white),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildDrawerItem(
     BuildContext context,
     IconData icon,
@@ -110,7 +111,7 @@ class CustomDrawer extends StatelessWidget {
       title: Text(title),
       onTap: () {
         Navigator.pop(context); // Close the drawer
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => screen),
         );

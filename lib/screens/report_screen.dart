@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/main.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({super.key});
@@ -116,6 +117,14 @@ class _ReportScreenState extends State<ReportScreen> {
         title: const Text(
           "Report Incident",
           style: TextStyle(fontWeight: FontWeight.w500, fontFamily: 'Poppins'),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const MainAppScreen()),
+            );
+          },
         ),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
@@ -561,7 +570,12 @@ class _ReportScreenState extends State<ReportScreen> {
               // Cancel Button
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const ReportScreen(),
+                    ),
+                  );
+                  ;
                 },
                 child: Text(
                   "Cancel",

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:test_project/main.dart';
 
 class CreditsScreen extends StatelessWidget {
   CreditsScreen({super.key});
 
-  // Mock data - in a real app, you would fetch this from your backend
+  // Mock data - in a real app, this data is fetched from the database
   final int totalCredits = 350;
   final List<Map<String, dynamic>> recentCredits = [
     {
@@ -62,27 +63,6 @@ class CreditsScreen extends StatelessWidget {
       'image': Icons.restaurant,
       'color': Colors.brown,
     },
-    {
-      'name': 'Eco-friendly Tote Bag',
-      'credits': 100,
-      'discount': '50% off',
-      'image': Icons.shopping_bag,
-      'color': Colors.teal,
-    },
-    {
-      'name': 'Reusable Water Bottle',
-      'credits': 150,
-      'discount': '30% off',
-      'image': Icons.water_drop,
-      'color': Colors.blue,
-    },
-    {
-      'name': 'Bamboo Cutlery Set',
-      'credits': 200,
-      'discount': '40% off',
-      'image': Icons.restaurant,
-      'color': Colors.brown,
-    },
   ];
 
   @override
@@ -93,6 +73,15 @@ class CreditsScreen extends StatelessWidget {
           "Recycling Credits",
           style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const MainAppScreen()),
+            );
+            // Navigator.pop(context);
+          },
+        ),
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
@@ -101,25 +90,23 @@ class CreditsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildCreditSummary(),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                "Recent Credits Earned",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
+            _buildSectionTitle("Recent Credits Earned"),
             _buildRecentCreditsList(),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                "Available Rewards",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
+            _buildSectionTitle("Available Rewards"),
             _buildAvailableRewards(),
             const SizedBox(height: 16),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Text(
+        title,
+        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -181,57 +168,61 @@ class CreditsScreen extends StatelessWidget {
       itemCount: recentCredits.length,
       itemBuilder: (context, index) {
         final credit = recentCredits[index];
-        return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                spreadRadius: 1,
-                blurRadius: 4,
-                offset: const Offset(0, 2),
-              ),
-            ],
-          ),
-          child: ListTile(
-            leading: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: credit['color'].withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(credit['icon'], color: credit['color']),
-            ),
-            title: Text(
-              "${credit['type']} - ${credit['weight']}",
-              style: const TextStyle(fontWeight: FontWeight.bold),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitle: Text(
-              credit['date'],
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            trailing: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: Colors.green.shade50,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text(
-                "+${credit['credits']}",
-                style: TextStyle(
-                  color: Colors.green.shade700,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        );
+        return _buildCreditTile(credit);
       },
+    );
+  }
+
+  Widget _buildCreditTile(Map<String, dynamic> credit) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: ListTile(
+        leading: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: credit['color'].withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(credit['icon'], color: credit['color']),
+        ),
+        title: Text(
+          "${credit['type']} - ${credit['weight']}",
+          style: const TextStyle(fontWeight: FontWeight.bold),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+          credit['date'],
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        trailing: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+            color: Colors.green.shade50,
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Text(
+            "+${credit['credits']}",
+            style: TextStyle(
+              color: Colors.green.shade700,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -244,75 +235,72 @@ class CreditsScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16),
         itemBuilder: (context, index) {
           final reward = availableRewards[index];
-          return Container(
-            width: 160,
-            margin: const EdgeInsets.only(right: 12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 1,
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: reward['color'].withOpacity(0.1),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    reward['image'],
-                    color: reward['color'],
-                    size: 32,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    reward['name'],
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  "${reward['discount']} for ${reward['credits']} credits",
-                  style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size(100, 30),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                  ),
-                  child: const Text("Redeem", style: TextStyle(fontSize: 12)),
-                ),
-              ],
-            ),
-          );
+          return _buildRewardCard(reward);
         },
+      ),
+    );
+  }
+
+  Widget _buildRewardCard(Map<String, dynamic> reward) {
+    return Container(
+      width: 160,
+      margin: const EdgeInsets.only(right: 12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: reward['color'].withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(reward['image'], color: reward['color'], size: 32),
+          ),
+          const SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              reward['name'],
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            "${reward['discount']} for ${reward['credits']} credits",
+            style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 8),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+              minimumSize: const Size(100, 30),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+            ),
+            child: const Text("Redeem", style: TextStyle(fontSize: 12)),
+          ),
+        ],
       ),
     );
   }

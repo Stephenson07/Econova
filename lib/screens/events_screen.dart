@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert'; // For JSON encoding
+import 'dart:convert';
+
+import 'package:test_project/main.dart'; // For JSON encoding
 
 class Event {
   final String title;
@@ -233,14 +235,21 @@ class _EventsScreenState extends State<EventsScreen> {
           "Upcoming Events",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.blue,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const MainAppScreen()),
+            );
+          },
+        ),
         actions: [
           IconButton(
             icon: Stack(
               children: [
-                // const Icon(Icons.filter_list),
+                const Icon(Icons.filter_list, color: Colors.white),
                 if (_selectedFilter != 'All')
                   Positioned(
                     right: 0,
@@ -560,10 +569,12 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create Event'),
-        centerTitle: true,
+        title: const Text(
+          'Create Event',
+          style: TextStyle(fontFamily: 'Poppins'),
+        ),
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blue,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

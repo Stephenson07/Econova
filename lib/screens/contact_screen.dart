@@ -1,115 +1,5 @@
-// import 'package:flutter/material.dart';
-
-// class ContactScreen extends StatelessWidget {
-//   const ContactScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text(
-//           "Contact Us",
-//           style: TextStyle(
-//             fontSize: 24,
-//             fontWeight: FontWeight.bold,
-//             color: Colors.white,
-//           ),
-//         ),
-//         backgroundColor: Colors.blue,
-//         elevation: 0,
-//       ),
-//       backgroundColor: Colors.white,
-//       body: Padding(
-//         padding: const EdgeInsets.all(20.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             const Text(
-//               "Get in Touch",
-//               style: TextStyle(
-//                 color: Colors.blue,
-//                 fontSize: 32,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//             const SizedBox(height: 10),
-//             const Text(
-//               "We would love to hear from you!",
-//               style: TextStyle(color: Colors.black, fontSize: 18),
-//             ),
-//             const SizedBox(height: 30),
-//             TextField(
-//               style: const TextStyle(color: Colors.black),
-//               decoration: InputDecoration(
-//                 labelText: "Your Name",
-//                 labelStyle: const TextStyle(color: Colors.grey),
-//                 filled: true,
-//                 fillColor: Colors.white,
-//                 border: OutlineInputBorder(
-//                   borderRadius: BorderRadius.circular(12),
-//                 ),
-//               ),
-//             ),
-//             const SizedBox(height: 20),
-//             TextField(
-//               style: const TextStyle(color: Colors.black),
-//               decoration: InputDecoration(
-//                 labelText: "Email",
-//                 labelStyle: const TextStyle(color: Colors.grey),
-//                 filled: true,
-//                 fillColor: Colors.white,
-//                 border: OutlineInputBorder(
-//                   borderRadius: BorderRadius.circular(12),
-//                 ),
-//               ),
-//             ),
-//             const SizedBox(height: 20),
-//             TextField(
-//               maxLines: 4,
-//               style: const TextStyle(color: Colors.black),
-//               decoration: InputDecoration(
-//                 labelText: "Message",
-//                 labelStyle: const TextStyle(color: Colors.grey),
-//                 filled: true,
-//                 fillColor: Colors.white,
-//                 border: OutlineInputBorder(
-//                   borderRadius: BorderRadius.circular(12),
-//                 ),
-//               ),
-//             ),
-//             const SizedBox(height: 30),
-//             ElevatedButton(
-//               onPressed: () {
-//                 ScaffoldMessenger.of(context).showSnackBar(
-//                   SnackBar(
-//                     content: Text('form submitted'),
-//                     duration: Duration(seconds: 1),
-//                   ),
-//                 );
-//               },
-
-//               style: ElevatedButton.styleFrom(
-//                 backgroundColor: Colors.blueAccent,
-//                 shape: RoundedRectangleBorder(
-//                   borderRadius: BorderRadius.circular(30),
-//                 ),
-//                 minimumSize: const Size(double.infinity, 50),
-//               ),
-//               child: const Text(
-//                 "Submit",
-//                 style: TextStyle(
-//                   color: Colors.white,
-//                   fontWeight: FontWeight.bold,
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
+import 'package:test_project/main.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
@@ -171,11 +61,16 @@ class _ContactScreenState extends State<ContactScreen> {
           "Contact Us",
           style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
         ),
-        backgroundColor: Colors.blue, // Deeper blue
+        backgroundColor: Colors.blue,
         elevation: 0,
-        centerTitle: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
+        // Removed the shape property to eliminate curved edges
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const MainAppScreen()),
+            );
+          },
         ),
       ),
       backgroundColor: Colors.grey[50],
@@ -412,7 +307,9 @@ class _ContactScreenState extends State<ContactScreen> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         elevation: 3,
+                        // ignore: deprecated_member_use
                         shadowColor: Colors.blue.withOpacity(0.3),
+                        // ignore: deprecated_member_use
                         disabledBackgroundColor: Colors.blue.withOpacity(0.6),
                       ),
                       child:
@@ -453,36 +350,6 @@ class _ContactScreenState extends State<ContactScreen> {
                         ),
                       ],
                     ),
-                    // child: Column(
-                    //   children: [
-                    //     const Text(
-                    //       "Other Ways to Reach Us",
-                    //       style: TextStyle(
-                    //         fontSize: 18,
-                    //         fontWeight: FontWeight.bold,
-                    //         color: Color(0xFF2563EB),
-                    //       ),
-                    //     ),
-                    //     const SizedBox(height: 16),
-                    //     _buildContactItem(
-                    //       Icons.email,
-                    //       "Email",
-                    //       "support@company.com",
-                    //     ),
-                    //     const Divider(height: 20),
-                    //     _buildContactItem(
-                    //       Icons.phone,
-                    //       "Phone",
-                    //       "+1 (555) 123-4567",
-                    //     ),
-                    //     const Divider(height: 20),
-                    //     _buildContactItem(
-                    //       Icons.location_on,
-                    //       "Address",
-                    //       "123 Business St, City, State 12345",
-                    //     ),
-                    //   ],
-                    // ),
                   ),
                 ],
               ),
@@ -490,33 +357,6 @@ class _ContactScreenState extends State<ContactScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildContactItem(IconData icon, String title, String detail) {
-    return Row(
-      children: [
-        Icon(icon, color: const Color(0xFF2563EB), size: 22),
-        const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-                color: Colors.grey,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              detail,
-              style: const TextStyle(fontSize: 16, color: Colors.black87),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }
