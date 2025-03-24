@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/main.dart';
+import 'package:Econova/main.dart';
 
 class ReportScreen extends StatefulWidget {
   const ReportScreen({super.key});
@@ -11,10 +11,10 @@ class ReportScreen extends StatefulWidget {
 class _ReportScreenState extends State<ReportScreen> {
   final _formKey = GlobalKey<FormState>();
   final _incidentTypes = [
-    'Accident',
-    'Theft',
-    'Fire',
-    'Natural Disaster',
+    'Illegal Dumping',
+    'Buring E-waste at your locality',
+    'Unregulated Recycling',
+    'E-Waste Smuggling & Illegal Exports',
     'Other',
   ];
   String _selectedType = 'Accident';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/main.dart';
+import 'package:Econova/main.dart';
 import 'create_group_screen.dart';
 
 class GroupsScreen extends StatefulWidget {

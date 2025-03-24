@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Exonova',
+      title: 'Econova',
       debugShowCheckedModeBanner: false,
       theme: _buildAppTheme(),
       home: const SignUpScreen(),

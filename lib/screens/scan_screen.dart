@@ -113,6 +113,107 @@ class _ScanScreenState extends State<ScanScreen> {
     );
   }
 
+  // Action buttons for recycling options
+  Widget _buildActionButtons() {
+    return Column(
+      children: [
+        Divider(thickness: 1),
+        SizedBox(height: 16),
+        Text(
+          'Recycling Options',
+          style: TextStyle(
+            fontSize: 22,
+            fontFamily: 'Poppins',
+            fontWeight: FontWeight.bold,
+            color: Colors.green[800],
+          ),
+        ),
+        SizedBox(height: 16),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            icon: Icon(Icons.map),
+            label: Text(
+              'Search Recycling Centers Near Me',
+              style: TextStyle(fontFamily: 'Poppins'),
+            ),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              // Implement search for recycling centers functionality
+              _searchRecyclingCenters();
+            },
+          ),
+        ),
+        SizedBox(height: 12),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            icon: Icon(Icons.sell),
+            label: Text(
+              'Sell This Product',
+              style: TextStyle(fontFamily: 'Poppins'),
+            ),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              // Implement sell product functionality
+              _sellProduct();
+            },
+          ),
+        ),
+        SizedBox(height: 12),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            icon: Icon(Icons.schedule),
+            label: Text(
+              'Schedule a Pickup',
+              style: TextStyle(fontFamily: 'Poppins'),
+            ),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: 16),
+              backgroundColor: Colors.purple,
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () {
+              // Implement schedule pickup functionality
+              _schedulePickup();
+            },
+          ),
+        ),
+        SizedBox(height: 24),
+      ],
+    );
+  }
+
+  // Function to handle searching for recycling centers
+  void _searchRecyclingCenters() {
+    // Implement logic to search for recycling centers
+    // This could open a map screen or navigate to a list of centers
+    print('Search for recycling centers triggered');
+  }
+
+  // Function to handle selling the product
+  void _sellProduct() {
+    // Implement logic to sell the product
+    // This could navigate to a marketplace or listing screen
+    print('Sell product triggered');
+  }
+
+  // Function to handle scheduling a pickup
+  void _schedulePickup() {
+    // Implement logic to schedule a pickup
+    // This could show a date/time picker or navigate to a scheduling screen
+    print('Schedule pickup triggered');
+  }
+
   // Pick an image from the gallery
   Future<void> _pickImage() async {
     final XFile? pickedFile = await _picker.pickImage(
@@ -154,7 +255,7 @@ class _ScanScreenState extends State<ScanScreen> {
     try {
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('http://192.168.31.180:5000/upload'),
+        Uri.parse('https://backend-qky9.onrender.com//upload'),
       );
       request.files.add(await http.MultipartFile.fromPath('images', file.path));
 
@@ -188,7 +289,9 @@ class _ScanScreenState extends State<ScanScreen> {
 
     try {
       var response = await http.get(
-        Uri.parse('http://192.168.31.180:5000/analyze?filename=$filename'),
+        Uri.parse(
+          'https://backend-qky9.onrender.com//analyze?filename=$filename',
+        ),
       );
 
       if (response.statusCode == 200) {
@@ -307,6 +410,10 @@ class _ScanScreenState extends State<ScanScreen> {
                 icon: Icons.recycling,
                 color: Colors.blue[700]!,
               ),
+              SizedBox(height: 24),
+
+              // Add the action buttons after analysis results
+              _buildActionButtons(),
             ],
           ],
         ),

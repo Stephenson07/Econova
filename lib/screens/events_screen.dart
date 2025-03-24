@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:test_project/main.dart'; // For JSON encoding
+import 'package:Econova/main.dart'; // For JSON encoding
 
 class Event {
   final String title;

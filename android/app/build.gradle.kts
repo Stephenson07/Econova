@@ -18,7 +18,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     ndkVersion = "27.0.12077973"
-    namespace = "com.example.test_project"
+    namespace = "com.example.Econova"
     compileSdk = flutter.compileSdkVersion
 
     compileOptions {

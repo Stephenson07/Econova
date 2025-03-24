@@ -1,4 +1,4 @@
-# test_project
+# Econova
 
 A new Flutter project.
 

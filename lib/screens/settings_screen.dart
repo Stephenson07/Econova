@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/main.dart';
+import 'package:Econova/main.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -19,25 +19,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
-      // appBar: AppBar(
-      //   title: const Text(
-      //     "Settings",
-      //     style: TextStyle(fontWeight: FontWeight.bold),
-      //   ),
-      //   centerTitle: true,
-      //   elevation: 0,
-      //   backgroundColor: Colors.white,
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.help_outline),
-      //       onPressed: () {
-      //         ScaffoldMessenger.of(context).showSnackBar(
-      //           const SnackBar(content: Text('Help section coming soon')),
-      //         );
-      //       },
-      //     ),
-      //   ],
-      // ),
       appBar: AppBar(
         title: const Text(
           "Settings",

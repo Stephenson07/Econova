@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/main.dart';
+import 'package:Econova/main.dart';
 
 class CreditsScreen extends StatelessWidget {
   CreditsScreen({super.key});

@@ -1,7 +1,7 @@
 // screens/signup_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_project/main.dart' show MainAppScreen;
+import 'package:Econova/main.dart' show MainAppScreen;
 import '../state/state.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -89,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(height: 10),
 
                   Text(
-                    'Exonova',
+                    'Econova',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,

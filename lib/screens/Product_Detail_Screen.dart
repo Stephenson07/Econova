@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:test_project/screens/store_screen.dart';
+import 'package:Econova/screens/store_screen.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   // Constants for styling and spacing
