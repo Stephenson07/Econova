@@ -32,7 +32,7 @@ class CustomDrawer extends StatelessWidget {
           _buildDrawerItem(
             context,
             Icons.group,
-            'Groups & Communities',
+            'Groups',
             const GroupsScreen(),
           ),
           _buildDrawerItem(context, Icons.paid, 'Credits', CreditsScreen()),

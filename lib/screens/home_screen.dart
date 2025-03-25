@@ -498,7 +498,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildExploreSection() {
     final features = [
       {
-        'title': 'Communities',
+        'title': 'Groups',
         'subtitle': 'Join recycling communities',
         'icon': Icons.group,
         'color': Colors.blue.shade700,
