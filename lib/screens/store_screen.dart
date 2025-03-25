@@ -56,15 +56,15 @@ class _StoreScreenState extends State<StoreScreen> {
     _products.addAll([
       Product(
         name: 'Laptop Pro X1',
-        price: 1299.99,
+        price: 12.99,
         durability: '4 years',
         imageUrl: 'assets/images/product_0.png',
         date: DateTime.now().subtract(const Duration(days: 1)),
         description: 'High-performance laptop with 16GB RAM and 512GB SSD',
       ),
       Product(
-        name: 'Smartphone Galaxy S30',
-        price: 899.99,
+        name: 'Smartphone Galaxy S20',
+        price: 99.99,
         durability: '3 years',
         imageUrl: 'assets/images/product_1.png',
         date: DateTime.now().subtract(const Duration(days: 5)),
@@ -73,7 +73,7 @@ class _StoreScreenState extends State<StoreScreen> {
       ),
       Product(
         name: 'Wireless Headphones',
-        price: 249.99,
+        price: 49.99,
         durability: '2 years',
         imageUrl: 'assets/images/product_10.png',
         date: DateTime.now().subtract(const Duration(days: 10)),
@@ -82,7 +82,7 @@ class _StoreScreenState extends State<StoreScreen> {
       ),
       Product(
         name: 'Smart Watch Pro',
-        price: 349.99,
+        price: 39.99,
         durability: '3 years',
         imageUrl: 'assets/images/product_3.png',
         date: DateTime.now().subtract(const Duration(days: 3)),
@@ -90,7 +90,7 @@ class _StoreScreenState extends State<StoreScreen> {
       ),
       Product(
         name: 'Tablet Air',
-        price: 599.99,
+        price: 59.99,
         durability: '4 years',
         imageUrl: 'assets/images/product_4.png',
         date: DateTime.now().subtract(const Duration(days: 7)),
@@ -98,7 +98,7 @@ class _StoreScreenState extends State<StoreScreen> {
       ),
       Product(
         name: 'Wireless Earbuds',
-        price: 149.99,
+        price: 49.99,
         durability: '2 years',
         imageUrl: 'assets/images/product_5.png',
         date: DateTime.now().subtract(const Duration(days: 15)),
@@ -106,7 +106,7 @@ class _StoreScreenState extends State<StoreScreen> {
       ),
       Product(
         name: 'Gaming Console X',
-        price: 499.99,
+        price: 49.99,
         durability: '5 years',
         imageUrl: 'assets/images/product_6.png',
         date: DateTime.now().subtract(const Duration(days: 20)),

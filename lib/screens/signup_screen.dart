@@ -85,7 +85,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Icon(Icons.eco, size: 70, color: Colors.blue),
-
                   const SizedBox(height: 10),
 
                   Text(

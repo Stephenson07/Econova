@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 import 'firebase.dart';
 import 'state/state.dart';
 import 'screens/home_screen.dart';
@@ -13,6 +14,13 @@ void main() async {
 
   // Initialize Firebase before running the app
   await FirebaseService.initializeFirebase();
+
+  // This simple API request is to wake up the Render server
+  try {
+    http.get(Uri.parse('https://backend-qky9.onrender.com/')).then((_) {});
+  } catch (e) {
+    // Ignore any errors
+  }
 
   runApp(
     MultiProvider(
