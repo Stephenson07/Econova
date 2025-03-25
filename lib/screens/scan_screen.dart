@@ -66,7 +66,7 @@ class _ScanScreenState extends State<ScanScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.search, size: 80, color: Colors.grey[400]),
+          Icon(Icons.photo_camera, size: 80, color: Colors.grey[400]),
           SizedBox(height: 16),
           Text(
             'Capture E-Waste',

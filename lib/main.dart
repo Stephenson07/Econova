@@ -126,7 +126,10 @@ class _MainAppScreenState extends State<MainAppScreen> {
       onTap: _onItemTapped,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(icon: Icon(Icons.qr_code), label: 'Capture'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.photo_camera),
+          label: 'Capture',
+        ),
         BottomNavigationBarItem(icon: Icon(Icons.store), label: 'Store'),
       ],
     );
