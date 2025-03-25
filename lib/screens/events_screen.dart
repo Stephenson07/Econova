@@ -76,7 +76,7 @@ class _EventsScreenState extends State<EventsScreen> {
                 // Send the event to the Flask API
                 final response = await http.post(
                   Uri.parse(
-                    'http:///192.168.31.180:5000/create_event',
+                    'https://backend-qky9.onrender.com/create_event',
                   ), // Use the correct URL for your Flask server
                   headers: {'Content-Type': 'application/json'},
                   body: json.encode({
