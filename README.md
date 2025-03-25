@@ -125,4 +125,37 @@ flutter build web
 
 # Screenshots
 # Project Structure
+```
+├── lib/
+│   ├── main.dart
+│   ├── firebase.dart
+│   ├── firebase_options.dart
+│   ├── screens/
+│   │   ├── addblog_screen.dart
+│   │   ├── cart.dart
+│   │   ├── cart_screen.dart
+│   │   ├── contact_screen.dart
+│   │   ├── create_group_screen.dart
+│   │   ├── credits_screen.dart
+│   │   ├── dashboard.dart
+│   │   ├── events_screen.dart
+│   │   ├── groups_screen.dart
+│   │   ├── home_screen.dart
+│   │   ├── Product_Detail_Screen.dart
+│   │   ├── report_screen.dart
+│   │   ├── scan_screen.dart
+│   │   ├── settings_screen.dart
+│   │   ├── signin_screen.dart
+│   │   ├── signup_screen.dart
+│   │   └── store_screen.dart
+│   ├── state/
+│   │   ├── state.dart
+│   └── widgets/
+│       ├── action_buttons.dart
+│       ├── activity_card.dart
+│       ├── carousel_slider.dart
+│       ├── custom_drawer.dart
+│       └── feature.dart
+
+```
 # Dependencies
