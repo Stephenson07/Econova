@@ -1,7 +1,5 @@
 # Econova - All your E-waste solutions at one place
 
-- This repo contains the Frontend code, for backend kindly visit [Backend Repository](https://github.com/Stephenson07/Backend)
-
 # Overview
 - EcoNova is a comprehensive mobile app designed to promote sustainable e-waste management and reduce its environmental impact through responsible recycling practices. By integrating gamification, our platform makes recycling both engaging and rewarding. Users participate in community-driven activities, events, and friendly competitions, earning credits for recycling e-waste, which can be exchanged for a variety of gifts. This approach encourages greater user involvement in e-waste recycling.
 
@@ -62,16 +60,92 @@ cd Econova
 1. Download `google-services.json` for Android
    - Go to Firebase Console
    - Select your project
-   - Add Android app
-   - Download configuration file
-   - Place in `android/app/` directory
+   - Add realtime database
+2. create a firebase_options.dart file in lib/ then copy and paste this code in that file
+```
+// replace the IDs and api-keys with your firebase IDs and api-keys
+import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
-2. Download `GoogleService-Info.plist` for iOS
-   - Go to Firebase Console
-   - Select your project
-   - Add iOS app
-   - Download configuration file
-   - Place in `ios/Runner/` directory
+class DefaultFirebaseOptions {
+  static FirebaseOptions get currentPlatform {
+    if (kIsWeb) {
+      return web;
+    }
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        return android;
+      case TargetPlatform.iOS:
+        return ios;
+      case TargetPlatform.macOS:
+        return macos;
+      case TargetPlatform.windows:
+        return windows;
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      default:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions are not supported for this platform.',
+        );
+    }
+  }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'your-apiikey',
+    appId: 'your-app-id',
+    messagingSenderId: 'your-messagingSenderId',
+    projectId: 'your-projectId',
+    databaseURL: 'your-databaseURL',
+    storageBucket: 'your-storageBucket',
+    authDomain: 'your-authDomain',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'your-api-key',
+    appId: 'your-app-id',
+    messagingSenderId: 'your-messagingSenderId',
+    projectId: 'your-projectId',
+    databaseURL: 'your-databaseURL',
+    storageBucket: 'your-storageBucket',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'your-api-key',
+    appId: 'your-app-id',
+    messagingSenderId: 'your-messagingSenderId',
+    projectId: 'your-projectId',
+    databaseURL: 'your-databaseURL',
+    storageBucket: 'your-storageBucket',
+    iosBundleId: 'your-iosBundleId',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'your-api-key',
+    appId: 'your-app-id',
+    messagingSenderId: 'your-messagingSenderId',
+    projectId: 'your-projectId',
+    databaseURL: 'your-databaseURL',
+    storageBucket: 'your-storageBucket',
+    iosBundleId: 'your-iosBundleId',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'your-api-key',
+    appId: 'your-app-id',
+    messagingSenderId: 'your-messagingSenderId',
+    projectId: 'your-projectId',
+    authDomain: 'your-authDomain',
+    databaseURL: 'your-databaseURL',
+    storageBucket: 'your-storageBucket',
+    measurementId: 'your-measurementId',
+  );
+}
+
+```
 
 ## 3. Install Dependencies
 ```bash
@@ -90,9 +164,6 @@ flutterfire configure
 # For Android
 flutter run -d android
 
-# For iOS
-flutter run -d ios
-
 # For Web
 flutter run -d edge
 ```
@@ -102,26 +173,8 @@ flutter run -d edge
 # Android APK
 flutter build apk --release
 
-# iOS IPA
-flutter build ios
-
-# Web
-flutter build web
 ```
 
-### Troubleshooting
-- Ensure all API keys are correctly configured
-- Check Firebase and Gemini API connectivity
-- Verify Flask server is running
-- Update Flutter and Dart to latest versions
-
-### Recommended Development Workflow
-1. Pull latest changes
-2. Install/update dependencies
-3. Configure environment variables
-4. Start Flask backend
-5. Run Flutter app
-6. Test and develop
 
 # Screenshots
 # Project Structure
@@ -159,3 +212,27 @@ flutter build web
 
 ```
 # Dependencies
+```
+cupertino_icons: ^1.0.8
+carousel_slider: ^5.0.0
+camera: ^0.11.1   
+path_provider: ^2.0.9 
+path: ^1.8.2
+async: ^2.9.0
+fluttertoast: ^8.0.9
+intl: ^0.20.2
+image_picker: ^1.1.2
+firebase_core: ^3.12.1
+firebase_database: ^11.3.4
+shared_preferences: ^2.2.0
+fl_chart: ^0.70.2 
+provider: ^6.0.5
+file_picker: ^9.2.1
+firebase_auth: ^5.5.1
+```
+
+#### Download it [here](https://drive.google.com/file/d/1VhIx8AztEKZI5D15Ph-wjU32yQ6TM2CH/view?usp=drive_link )
+
+
+
+- This repo contains the Frontend code, for backend kindly visit [Backend Repository](https://github.com/Stephenson07/Backend)
