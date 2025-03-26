@@ -1,4 +1,5 @@
-![Alt text](assets/images/econova_icon.jpeg)
+<img src="assets/images/econova_icon.jpeg" alt="Alt text" height="300">
+
 
 # Econova - All your E-waste solutions at one place
 
@@ -177,6 +178,14 @@ flutter build apk --release
 
 
 # Screenshots
+<img src="assets/images/signup.jpg" alt="Alt text" height="300">
+<img src="assets/images/home.jpg" alt="Alt text" height="300">
+<img src="assets/images/menu.jpg" alt="Alt text" height="300">
+<img src="assets/images/schedule_pickup.jpg" alt="Alt text" height="300">
+<img src="assets/images/capture.jpg" alt="Alt text" height="300">
+<img src="assets/images/events.jpg" alt="Alt text" height="300">
+
+
 # Project Structure
 ```
 ├── lib/
