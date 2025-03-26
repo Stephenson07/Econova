@@ -1,3 +1,5 @@
+![Alt text](assets/images/econova_icon.jpeg)
+
 # Econova - All your E-waste solutions at one place
 
 # Overview
@@ -38,8 +40,6 @@ Geo-optimized collection routing
 - IDX
 
 # Prerequisites
-## Development Environment
-
 - Flutter SDK
 - Dart SDK
 - Android Studio or Visual Studio Code or IDX
